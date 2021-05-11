@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AdiverySample</string>
+    <string name="banner">Banner</string>
+    <string name="large_banner">Large Banner</string>
+    <string name="medium_rectangle">Medium Rectangle</string>
+    <string name="interstitial">interstitial</string>
+    <string name="rewarded">rewarded</string>
+    <string name="name_native">native</string>
+</resources>
