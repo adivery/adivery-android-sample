@@ -6,4 +6,19 @@
     <string name="interstitial">interstitial</string>
     <string name="rewarded">rewarded</string>
     <string name="name_native">native</string>
+    <string name="create_profile">Create a new profile</string>
+    <string name="hint_app_id">Application Id</string>
+    <string name="hint_banner">Banner Placement Id</string>
+    <string name="hint_native">Native Placement Id</string>
+    <string name="hint_interstitial">Interstitial Placement Id</string>
+    <string name="hint_app_open">AppOpen Placement Id</string>
+    <string name="hint_rewarded">Rewarded Placement Id</string>
+    <string name="create">CREATE</string>
+    <string name="error_invalid_uuid">This field must be a valid uuid</string>
+    <string name="profile_name">Profile name</string>
+    <string name="error_empty">This field cannot be empty</string>
+    <string name="message_profile_created">Profile created</string>
+    <string name="configure">configure</string>
+    <string name="create_profile_button">Create profile</string>
+    <string name="select_profile_text">Select a profile to continue</string>
 </resources>

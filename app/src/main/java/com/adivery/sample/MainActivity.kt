@@ -1,129 +1,99 @@
 package com.adivery.sample
 
-import android.app.ActionBar
-import android.opengl.Visibility
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.Toast
-import com.adivery.sdk.*
+import android.widget.*
+import com.adivery.sdk.Adivery
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var profileManager: ProfileManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Adivery.setLoggingEnabled(true)
-        Adivery.configure(application, "59c36ce3-7125-40a7-bd34-144e6906c796")
+        profileManager = ProfileManager(this)
 
-        findViewById<Button>(R.id.btn_banner).setOnClickListener {
-            Adivery.requestBannerAd(this, "a355be22-970a-46b8-bc52-f0a59c4ded05",
-                BannerType.BANNER, object : AdiveryBannerCallback() {
-                    override fun onAdLoaded(adView: View) {
-                        adView.apply {
-                            displayBannerAd(this)
-                        }
-                    }
-            })
+        addAdiveryProfile()
+
+        val profileSpinner = findViewById<Spinner>(R.id.profile_spinner)
+
+        findViewById<View>(R.id.configure).setOnClickListener {
+            Adivery.setLoggingEnabled(true)
+            val profile = profileSpinner.selectedItem.toString()
+            Adivery.configure(application, profileManager.getAppId(profile))
+
+            Adivery.prepareInterstitialAd(
+                baseContext,
+                profileManager.getInterstitialPlacementId(profile)
+            )
+            Adivery.prepareRewardedAd(baseContext, profileManager.getRewardedPlacementId(profile))
+            Adivery.prepareAppOpenAd(this, profileManager.getAppOpenPlacementId(profile))
         }
 
-        findViewById<Button>(R.id.btn_large_banner).setOnClickListener {
-            Adivery.requestBannerAd(this, "90717d2a-dad1-4ac1-8e71-c4d741a225bb",
-                BannerType.LARGE_BANNER, object : AdiveryBannerCallback() {
-                    override fun onAdLoaded(adView: View) {
-                        adView.apply {
-                            displayBannerAd(adView)
-                        }
-                    }
-                })
-        }
-        findViewById<Button>(R.id.btn_medium_rectangle).setOnClickListener {
-            Adivery.requestBannerAd(this, "850d771f-dd47-4b2e-832c-ad1ad70d9266",
-                BannerType.MEDIUM_RECTANGLE, object : AdiveryBannerCallback() {
-                    override fun onAdLoaded(adView: View) {
-                        adView.apply {
-                            displayBannerAd(adView)
-                        }
-                    }
-                })
+        findViewById<View>(R.id.create_profile).setOnClickListener {
+            startActivity(
+                Intent(this@MainActivity, CreateProfileActivity::class.java)
+            )
         }
 
-        findViewById<Button>(R.id.btn_interstitial).setOnClickListener {
-            Adivery.requestInterstitialAd(this, "38b301f2-5e0c-4776-b671-c6b04a612311",
-                object : AdiveryInterstitialCallback() {
-                    override fun onAdLoaded(ad: AdiveryLoadedAd) {
-                        ad.apply {
-                            show()
-                        }
-                    }
-                })
+        findViewById<View>(R.id.rewarded).setOnClickListener {
+            val profile = profileSpinner.selectedItem.toString()
+            Adivery.showAd(profileManager.getRewardedPlacementId(profile))
         }
-        findViewById<Button>(R.id.btn_rewarded).setOnClickListener {
-            Adivery.requestRewardedAd(this, "16414bae-368e-4904-b259-c5b89362206d",
-                object : AdiveryRewardedCallback() {
-                    override fun onAdLoaded(ad: AdiveryLoadedAd) {
-                        ad.apply {
-                            show()
-                        }
-                    }
-
-                    override fun onAdRewarded() {
-                        Toast.makeText(
-                            this@MainActivity,"Ad Rewarded", Toast.LENGTH_LONG
-                        ).show()
-                        Log.i("MainActivity", "Rewarded called")
-                    }
-                })
+        findViewById<View>(R.id.interstitial).setOnClickListener {
+            val profile = profileSpinner.selectedItem.toString()
+            Adivery.showAd(profileManager.getInterstitialPlacementId(profile))
         }
 
-        findViewById<Button>(R.id.btn_native).setOnClickListener {
-            Adivery.requestNativeAd(this, "ff454979-efaa-4ab8-b084-7db19e995d9b",
-                object : AdiveryNativeCallback() {
-                    override fun onAdLoaded(ad: AdiveryNativeAd) {
-                        ad.apply {
-                            displayNativeAd(this)
-                        }
-                    }
-                })
+        findViewById<View>(R.id.app_open).setOnClickListener {
+            val profile = profileSpinner.selectedItem.toString()
+            Adivery.showAppOpenAd(this@MainActivity, profileManager.getAppOpenPlacementId(profile))
         }
-    }
 
-    private fun displayNativeAd(adiveryNativeAd: AdiveryNativeAd) {
-        findViewById<AdiveryNativeAdView>(R.id.native_ad_layout).apply {
-            visibility = View.VISIBLE
-            disableBanner()
-            setNativeAd(adiveryNativeAd)
-        }
-    }
-
-    private fun disableBanner() {
-        findViewById<LinearLayout>(R.id.banner_ad_container).apply {
-            visibility = View.GONE
-        }
-    }
-
-    fun displayBannerAd(adView: View){
-        findViewById<LinearLayout>(R.id.banner_ad_container).apply {
-            disableNative()
-            removeAllViews()
-            visibility = View.VISIBLE
-            adView.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT
-            ).apply {
-                gravity = Gravity.CENTER
+        findViewById<View>(R.id.banner).setOnClickListener {
+            val profile = profileSpinner.selectedItem.toString()
+            val intent = Intent(this, BannerActivity::class.java).apply {
+                putExtra("placement_id", profileManager.getBannerPlacementId(profile))
             }
-            addView(adView)
+            startActivity(intent)
+        }
+
+        findViewById<View>(R.id.native_ad).setOnClickListener {
+            val profile = profileSpinner.selectedItem.toString()
+            val intent = Intent(this, NativeActivity::class.java).apply {
+                putExtra("placement_id", profileManager.getNativePlacementId(profile))
+            }
+            startActivity(intent)
         }
     }
 
-    private fun disableNative() {
-        findViewById<AdiveryNativeAdView>(R.id.native_ad_layout).apply {
-            visibility = View.GONE
-        }
+    override fun onResume() {
+        super.onResume()
+        val profileSpinner = findViewById<Spinner>(R.id.profile_spinner)
+        profileSpinner.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, profileManager.profiles)
+
+    }
+
+    fun addAdiveryProfile() {
+        val appId = "7e27fb38-5aff-473a-998f-437b89426f66"
+        val rewardedPlacementId = "2efedcaa-fcc0-4610-a025-109ff17594af"
+        val bannerPlacementId = "5f2c4c86-a6ec-4735-9a44-f881fe40789f"
+        val nativePlacementId = "25928bf1-d4f7-432c-aaf7-1780602796c3"
+        val interstitialPlacementId = "de5db046-765d-478f-bb2e-30dc2eaf3f51"
+        val appOpenPlacementId = "9e9dd375-a1fe-4c2b-8432-b5bf8a5095f6"
+        val profile = "adivery"
+        profileManager.addProfile(profile)
+        profileManager.setAppId(profile, appId)
+        profileManager.setBannerPlacementId(profile, bannerPlacementId)
+        profileManager.setNativePlacementId(profile, nativePlacementId)
+        profileManager.setInterstitialPlacementId(profile, interstitialPlacementId)
+        profileManager.setRewardedPlacementId(profile, rewardedPlacementId)
+        profileManager.setAppOpenPlacementId(profile, appOpenPlacementId)
+
     }
 }

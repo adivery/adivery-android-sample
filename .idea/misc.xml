@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_banner.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/activity_create_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/activity_native.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/native_ad_layout.xml" value="0.353125" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

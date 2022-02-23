@@ -5,100 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_banner"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
+        android:layout_margin="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:text="@string/banner"
-            android:textColor="@color/design_default_color_primary" />
+            android:padding="8dp"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_large_banner"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:lines="1"
-            android:text="@string/large_banner"
-            android:textColor="@color/design_default_color_primary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/select_profile_text"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:padding="8dp"/>
 
-        <Button
-            android:id="@+id/btn_medium_rectangle"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:lines="1"
-            android:text="@string/medium_rectangle"
-            android:textColor="@color/design_default_color_primary" />
-    </LinearLayout>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:id="@+id/profile_spinner"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:id="@+id/configure"
+                    android:text="@string/configure"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:id="@+id/create_profile"
+                    android:text="@string/create_profile_button"/>
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_interstitial"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:text="@string/interstitial"
-            android:textColor="@color/design_default_color_primary" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rewarded"
+                android:text="REWARDED"/>
 
-        <Button
-            android:id="@+id/btn_native"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:lines="1"
-            android:text="@string/name_native"
-            android:textColor="@color/design_default_color_primary" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/interstitial"
+                android:text="INTERSTITIAL"/>
 
-        <Button
-            android:id="@+id/btn_rewarded"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:lines="1"
-            android:text="@string/rewarded"
-            android:textColor="@color/design_default_color_primary" />
-    </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/app_open"
+                android:text="APP_OPEN"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:gravity="center"
-        android:id="@+id/banner_ad_container"
-        android:orientation="vertical"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/banner"
+                android:text="@string/banner"/>
 
-    <com.adivery.sdk.AdiveryNativeAdView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/native_ad_layout"
-        app:adivery_native_ad_layout="@layout/native_ad_layout"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/native_ad"
+                android:text="NATIVE"/>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 

@@ -1,36 +1,61 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
-    <ImageView
-        android:id="@+id/adivery_image"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
+    android:animateLayoutChanges="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="4dp">
-        <Button
-            android:id="@+id/adivery_call_to_action"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_margin="4dp" />
-        <TextView
-            android:id="@+id/adivery_headline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1" />
-        <ImageView
-            android:id="@id/adivery_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_margin="4dp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:id="@+id/native_container"
+            android:padding="4dp">
+            <Button
+                android:id="@+id/adivery_call_to_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_margin="4dp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/adivery_headline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:layout_margin="4dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:id="@+id/adivery_advertiser"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/adivery_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="4dp" />
+        </LinearLayout>
+
+        <com.adivery.sdk.AdiveryNativeAdMediaView
+            android:id="@+id/adivery_image"
+            android:layout_width="350dp"
+            android:layout_height="180dp"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+            android:scaleType="centerCrop" />
     </LinearLayout>
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>
