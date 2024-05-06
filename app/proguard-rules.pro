@@ -40,3 +40,4 @@
 -dontwarn com.mbridge.msdk.newinterstitial.*.*
 -dontwarn com.startapp.sdk.*.*
 -dontwarn com.startapp.sdk.adsbase.*.*
+-dontwarn com.google.android.gms.internal.ads.*
