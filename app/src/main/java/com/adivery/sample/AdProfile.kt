@@ -14,6 +14,7 @@ data class AdProfile(
     val appOpenPlacementId: String,
     val bannerPlacementId: String,
     val nativePlacementId: String,
+    val vastPlacementId: String,
 ) {
     companion object {
 
@@ -26,6 +27,7 @@ data class AdProfile(
             appOpenPlacementId = "9e9dd375-a1fe-4c2b-8432-b5bf8a5095f6",
             bannerPlacementId = "5f2c4c86-a6ec-4735-9a44-f881fe40789f",
             nativePlacementId = "25928bf1-d4f7-432c-aaf7-1780602796c3",
+            vastPlacementId = "a750d453-bc0f-4006-8346-d398fcf34a50",
         )
     }
 }

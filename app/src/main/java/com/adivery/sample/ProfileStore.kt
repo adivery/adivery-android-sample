@@ -35,6 +35,7 @@ class ProfileStore private constructor(context: Context) {
             putString(profile.key(KEY_APP_OPEN), profile.appOpenPlacementId)
             putString(profile.key(KEY_BANNER), profile.bannerPlacementId)
             putString(profile.key(KEY_NATIVE), profile.nativePlacementId)
+            putString(profile.key(KEY_VAST), profile.vastPlacementId)
         }
     }
 
@@ -50,6 +51,7 @@ class ProfileStore private constructor(context: Context) {
             appOpenPlacementId = prefs.read(name, KEY_APP_OPEN),
             bannerPlacementId = prefs.read(name, KEY_BANNER),
             nativePlacementId = prefs.read(name, KEY_NATIVE),
+            vastPlacementId = prefs.read(name, KEY_VAST),
         )
     }
 
@@ -68,6 +70,7 @@ class ProfileStore private constructor(context: Context) {
         private const val KEY_APP_OPEN = "app_open"
         private const val KEY_BANNER = "banner"
         private const val KEY_NATIVE = "native"
+        private const val KEY_VAST = "vast"
 
         @Volatile
         private var instance: ProfileStore? = null
@@ -76,8 +79,6 @@ class ProfileStore private constructor(context: Context) {
         fun get(context: Context): ProfileStore =
             instance ?: synchronized(this) {
                 instance ?: ProfileStore(context).also {
-                    // Seeded only when missing. Re-saving it on every launch would overwrite the
-                    // stored credentials of a user profile that happens to share the name.
                     if (!it.hasProfile(AdProfile.BUNDLED.name)) {
                         it.save(AdProfile.BUNDLED)
                     }

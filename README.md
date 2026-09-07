@@ -15,6 +15,7 @@ Full documentation: <https://adivery.com/android>
 | App open     | [`KotlinAppOpenActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinAppOpenActivity.kt)           | [`JavaAppOpenActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaAppOpenActivity.java)           |
 | Banner       | [`KotlinBannerActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinBannerActivity.kt)             | [`JavaBannerActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaBannerActivity.java)             |
 | Native       | [`KotlinNativeActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinNativeActivity.kt)             | [`JavaNativeActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaNativeActivity.java)             |
+| Pre-Roll (VAST) | [`KotlinVastActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinVastActivity.kt)              | [`JavaVastActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaVastActivity.java)                 |
 
 Each screen requests an ad, shows it, and prints every SDK callback it receives so the ad lifecycle
 is visible while the sample runs.
@@ -26,6 +27,7 @@ is visible while the sample runs.
 | [`SampleApplication.kt`](app/src/main/java/com/adivery/sample/SampleApplication.kt) | `Adivery.configure` and `Adivery.setLoggingEnabled`, called once per process |
 | [`AppOpenAdManager.kt`](app/src/main/java/com/adivery/sample/AppOpenAdManager.kt) | The recommended app open pattern: show the ad when the user returns after a few seconds away |
 | [`view_native_ad.xml`](app/src/main/res/layout/view_native_ad.xml) | The native ad template and the view ids `AdiveryNativeAdView` populates |
+| [`activity_vast_ad.xml`](app/src/main/res/layout/activity_vast_ad.xml) | The ExoPlayer `PlayerView` the pre-roll plays in, and the 320×50 slot IMA draws the companion banner into |
 | [`proguard-rules.pro`](app/proguard-rules.pro) | A local copy of the `keep`/`dontwarn` rules the SDK already contributes through its own consumer rules, kept because the documentation links to this file |
 | [`ProfileStore.kt`](app/src/main/java/com/adivery/sample/ProfileStore.kt), [`CreateProfileActivity.kt`](app/src/main/java/com/adivery/sample/CreateProfileActivity.kt) | Sample plumbing only — storage for the credentials the sample runs with |
 
@@ -43,5 +45,16 @@ the [Adivery publisher panel](https://panel.adivery.com). Select the new profile
 ```kotlin
 dependencies {
     implementation("com.adivery:sdk:4.9.0")
+}
+```
+
+Pre-Roll is the exception: Adivery only hands out the VAST url, so that screen also needs a video
+player able to read it.
+
+```kotlin
+dependencies {
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.media3:media3-ui:1.3.1")
+    implementation("androidx.media3:media3-exoplayer-ima:1.3.1")
 }
 ```

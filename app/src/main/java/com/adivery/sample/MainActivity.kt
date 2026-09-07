@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding.appOpen.setOnClickListener { open(AdSample.APP_OPEN) }
         binding.banner.setOnClickListener { open(AdSample.BANNER) }
         binding.nativeAd.setOnClickListener { open(AdSample.NATIVE) }
+        binding.vast.setOnClickListener { open(AdSample.VAST) }
     }
 
     override fun onResume() {

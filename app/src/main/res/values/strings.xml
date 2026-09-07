@@ -19,18 +19,21 @@
     <string name="sample_app_open">App open</string>
     <string name="sample_banner">Banner</string>
     <string name="sample_native">Native</string>
+    <string name="sample_vast">Pre-Roll (VAST)</string>
 
     <string name="sample_interstitial_kotlin">Interstitial · Kotlin</string>
     <string name="sample_rewarded_kotlin">Rewarded · Kotlin</string>
     <string name="sample_app_open_kotlin">App open · Kotlin</string>
     <string name="sample_banner_kotlin">Banner · Kotlin</string>
     <string name="sample_native_kotlin">Native · Kotlin</string>
+    <string name="sample_vast_kotlin">Pre-Roll (VAST) · Kotlin</string>
 
     <string name="sample_interstitial_java">Interstitial · Java</string>
     <string name="sample_rewarded_java">Rewarded · Java</string>
     <string name="sample_app_open_java">App open · Java</string>
     <string name="sample_banner_java">Banner · Java</string>
     <string name="sample_native_java">Native · Java</string>
+    <string name="sample_vast_java">Pre-Roll (VAST) · Java</string>
 
     <!-- Ad screens -->
     <string name="placement_id">Placement: %1$s</string>
@@ -48,6 +51,10 @@
     <string name="banner_size_smart">Smart banner</string>
     <string name="section_banner_in_code">Created in code</string>
     <string name="section_banner_in_xml">Declared in XML</string>
+    <string name="play_video">Play video</string>
+    <string name="waiting_for_vast_url">Waiting for the VAST url (attempt %1$d of %2$d)</string>
+    <string name="vast_url_ready">VAST url ready: %1$s</string>
+    <string name="vast_url_unavailable">Gave up waiting for the VAST url, playing the content without an ad</string>
 
     <!-- Profile creation -->
     <string name="create_profile">New profile</string>
@@ -59,6 +66,7 @@
     <string name="hint_app_open">App open placement id</string>
     <string name="hint_banner">Banner placement id</string>
     <string name="hint_native">Native placement id</string>
+    <string name="hint_vast">Pre-Roll (VAST) placement id</string>
     <string name="create">Create</string>
     <string name="error_invalid_uuid">This field must be a valid uuid</string>
     <string name="error_empty">This field cannot be empty</string>

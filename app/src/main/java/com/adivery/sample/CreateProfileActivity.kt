@@ -41,9 +41,10 @@ class CreateProfileActivity : AppCompatActivity() {
         val appOpen = binding.appOpenLayout.requireUuid()
         val banner = binding.bannerLayout.requireUuid()
         val nativeAd = binding.nativeLayout.requireUuid()
+        val vast = binding.vastLayout.requireUuid()
 
         if (name == null || appId == null || interstitial == null || rewarded == null ||
-            appOpen == null || banner == null || nativeAd == null
+            appOpen == null || banner == null || nativeAd == null || vast == null
         ) {
             return null
         }
@@ -56,6 +57,7 @@ class CreateProfileActivity : AppCompatActivity() {
             appOpenPlacementId = appOpen,
             bannerPlacementId = banner,
             nativePlacementId = nativeAd,
+            vastPlacementId = vast,
         )
     }
 

@@ -44,6 +44,9 @@
         <activity
             android:name=".kotlinsamples.KotlinNativeActivity"
             android:exported="false" />
+        <activity
+            android:name=".kotlinsamples.KotlinVastActivity"
+            android:exported="false" />
 
         <!-- Java samples -->
         <activity
@@ -60,6 +63,9 @@
             android:exported="false" />
         <activity
             android:name=".javasamples.JavaNativeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".javasamples.JavaVastActivity"
             android:exported="false" />
 
     </application>
