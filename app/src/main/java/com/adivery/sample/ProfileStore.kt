@@ -21,8 +21,6 @@ class ProfileStore private constructor(context: Context) {
         get() = prefs.getString(KEY_ACTIVE_PROFILE, null)
             ?.let(::findProfile)
             ?: AdProfile.BUNDLED
-        // Committed synchronously rather than applied: the caller restarts the process immediately
-        // after setting this, which would outrun an asynchronous write.
         set(value) = prefs.edit(commit = true) { putString(KEY_ACTIVE_PROFILE, value.name) }
 
     private val profileNames: Set<String>

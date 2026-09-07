@@ -70,15 +70,10 @@ class MainActivity : AppCompatActivity() {
             .setTitle(R.string.restart_required_title)
             .setMessage(getString(R.string.restart_required_message, profile.name))
             .setPositiveButton(R.string.restart_now) { _, _ ->
-                // Stored only on the way to a restart. The SDK is already configured with the
-                // current profile's application id, so persisting the choice while this process
-                // keeps running would leave the samples reading placement ids from one profile
-                // and the SDK configured with another's application id.
                 profileStore.activeProfile = profile
                 restart()
             }
             .setNegativeButton(R.string.later, null)
-            // Puts the dropdown back to the profile the SDK is actually configured with.
             .setOnDismissListener { showProfiles() }
             .show()
     }
