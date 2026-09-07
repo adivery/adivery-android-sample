@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The Adivery SDK contributes everything it needs (the INTERNET permission, its activities and its
+  proguard rules) through manifest merging, so nothing ad related has to be declared here.
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <application
+        android:name=".SampleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdiverySample">
-        <activity
-            android:name=".NativeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BannerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateProfileActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -25,6 +23,45 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".CreateProfileActivity"
+            android:exported="false" />
+
+        <!-- Kotlin samples -->
+        <activity
+            android:name=".kotlinsamples.KotlinInterstitialActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kotlinsamples.KotlinRewardedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kotlinsamples.KotlinAppOpenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kotlinsamples.KotlinBannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kotlinsamples.KotlinNativeActivity"
+            android:exported="false" />
+
+        <!-- Java samples -->
+        <activity
+            android:name=".javasamples.JavaInterstitialActivity"
+            android:exported="false" />
+        <activity
+            android:name=".javasamples.JavaRewardedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".javasamples.JavaAppOpenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".javasamples.JavaBannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".javasamples.JavaNativeActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

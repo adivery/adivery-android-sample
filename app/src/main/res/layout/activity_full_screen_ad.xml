@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Shared by the interstitial, rewarded and app open samples, in both Kotlin and Java.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        tools:text="Interstitial · Kotlin" />
+
+    <TextView
+        android:id="@+id/placement_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        tools:text="Placement: de5db046-765d-478f-bb2e-30dc2eaf3f51" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/request_ad" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/show"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/show_ad" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/auto_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/auto_show_on_return"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/section_callbacks"
+        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textIsSelectable="true" />
+
+    </ScrollView>
+
+</LinearLayout>

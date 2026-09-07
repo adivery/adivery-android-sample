@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Native ad template.
+
+  AdiveryNativeAdView inflates this layout and populates the views it recognises by id. The headline
+  and the call to action are mandatory; everything else is optional and simply left untouched when
+  the ad does not carry it.
+
+    adivery_wrapper         the outermost view of the ad
+    adivery_headline        the ad title
+    adivery_description     the ad description
+    adivery_advertiser      the advertised brand or application
+    adivery_call_to_action  the action button
+    adivery_image           the 16:9 landscape creative (AdiveryNativeAdMediaView)
+    adivery_icon            the square brand icon
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewOutlinedStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/adivery_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <com.adivery.sdk.AdiveryNativeAdMediaView
+            android:id="@+id/adivery_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/adivery_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/adivery_headline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    tools:text="Ad headline" />
+
+                <TextView
+                    android:id="@+id/adivery_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    tools:text="Ad description" />
+
+                <TextView
+                    android:id="@+id/adivery_advertiser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    tools:text="Advertiser" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/adivery_call_to_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Install" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

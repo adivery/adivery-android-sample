@@ -1,92 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:fillViewport="true"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
-        <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:orientation="vertical">
+            android:text="@string/app_name"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/select_profile_text"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:padding="8dp"/>
+        <TextView
+            android:id="@+id/active_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            tools:text="Running as adivery" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:id="@+id/profile_spinner"/>
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:id="@+id/configure"
-                    android:text="@string/configure"/>
-                <Button
-                    android:layout_width="0dp"
+                    android:text="@string/section_profile"
+                    android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:id="@+id/create_profile"
-                    android:text="@string/create_profile_button"/>
+                    android:layout_marginTop="4dp"
+                    android:text="@string/section_profile_description"
+                    android:textAppearance="?attr/textAppearanceBodySmall" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="?attr/textInputOutlinedExposedDropdownMenuStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/hint_profile">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/profile_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/apply_profile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:text="@string/apply_profile" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/create_profile"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:text="@string/create_profile" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <Button
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rewarded"
-                android:text="REWARDED"/>
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/interstitial"
-                android:text="INTERSTITIAL"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/section_language"
+                    android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/app_open"
-                android:text="APP_OPEN"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/section_language_description"
+                    android:textAppearance="?attr/textAppearanceBodySmall" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/banner"
-                android:text="@string/banner"/>
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/language_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:checkedButton="@id/language_kotlin"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/native_ad"
-                android:text="NATIVE"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/language_kotlin"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/language_kotlin" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/language_java"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/language_java" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                </com.google.android.material.button.MaterialButtonToggleGroup>
 
+            </LinearLayout>
 
+        </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/section_placements"
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/interstitial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sample_interstitial" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rewarded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sample_rewarded" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/app_open"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sample_app_open" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sample_banner" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/native_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sample_native" />
+
+    </LinearLayout>
+
+</ScrollView>

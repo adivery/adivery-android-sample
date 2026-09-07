@@ -8,6 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.adivery.sample"
+        // The Adivery SDK requires minSdk 21 or above.
         minSdk = 21
         targetSdk = 36
         versionCode = 1
@@ -23,6 +24,11 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -33,8 +39,8 @@ dependencies {
     implementation(libs.adivery.sdk)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
     implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
