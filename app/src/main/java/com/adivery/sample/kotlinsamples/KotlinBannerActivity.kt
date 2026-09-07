@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.adivery.sample.AdEventLog
 import com.adivery.sample.ProfileStore
 import com.adivery.sample.R
@@ -12,28 +13,19 @@ import com.adivery.sample.databinding.ActivityBannerAdBinding
 import com.adivery.sdk.AdiveryAdListener
 import com.adivery.sdk.AdiveryBannerAdView
 import com.adivery.sdk.BannerSize
+import com.google.android.material.tabs.TabLayout
 
 /**
  * Banner ads in Kotlin.
- *
- * A banner can be declared straight in XML:
- *
- * ```xml
- * <com.adivery.sdk.AdiveryBannerAdView
- *     android:layout_width="match_parent"
- *     android:layout_height="wrap_content"
- *     app:placement_id="YOUR_PLACEMENT_ID"
- *     app:banner_size="banner" />
- * ```
- *
- * This screen builds it in code instead, so the four sizes can be swapped at runtime. A fresh view
- * is created per size because [AdiveryBannerAdView] reserves space for the size it was loaded with.
+ * Banners can be created in two ways, both in code or directly in XML.
  */
 class KotlinBannerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBannerAdBinding
     private lateinit var eventLog: AdEventLog
     private lateinit var placementId: String
+
+    private lateinit var xmlBanners: List<AdiveryBannerAdView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,15 +40,38 @@ class KotlinBannerActivity : AppCompatActivity() {
         binding.title.setText(R.string.sample_banner_kotlin)
         binding.placementId.text = getString(R.string.placement_id, placementId)
 
-        binding.sizeBanner.setOnClickListener { showBanner(BannerSize.BANNER, "BANNER") }
-        binding.sizeLargeBanner.setOnClickListener { showBanner(BannerSize.LARGE_BANNER, "LARGE_BANNER") }
-        binding.sizeMediumRectangle.setOnClickListener { showBanner(BannerSize.MEDIUM_RECTANGLE, "MEDIUM_RECTANGLE") }
-        binding.sizeSmartBanner.setOnClickListener { showBanner(BannerSize.SMART_BANNER, "SMART_BANNER") }
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                binding.codeSection.root.isVisible = tab.position == TAB_CODE
+                binding.xmlSection.root.isVisible = tab.position == TAB_XML
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+            override fun onTabReselected(tab: TabLayout.Tab) = Unit
+        })
+
+        val code = binding.codeSection
+        code.sizeBanner.setOnClickListener { showBanner(BannerSize.BANNER, "BANNER") }
+        code.sizeLargeBanner.setOnClickListener { showBanner(BannerSize.LARGE_BANNER, "LARGE_BANNER") }
+        code.sizeMediumRectangle.setOnClickListener { showBanner(BannerSize.MEDIUM_RECTANGLE, "MEDIUM_RECTANGLE") }
+        code.sizeSmartBanner.setOnClickListener { showBanner(BannerSize.SMART_BANNER, "SMART_BANNER") }
+
+        val xml = binding.xmlSection
+        xmlBanners = listOf(xml.xmlBanner, xml.xmlLargeBanner, xml.xmlMediumRectangle, xml.xmlSmartBanner)
+        xmlBanners.forEach { banner ->
+            banner.setPlacementId(placementId)
+            banner.setBannerAdListener(listener("xml"))
+        }
+
+        xml.xmlSizeBanner.setOnClickListener { showXmlBanner(xml.xmlBanner, "BANNER") }
+        xml.xmlSizeLargeBanner.setOnClickListener { showXmlBanner(xml.xmlLargeBanner, "LARGE_BANNER") }
+        xml.xmlSizeMediumRectangle.setOnClickListener { showXmlBanner(xml.xmlMediumRectangle, "MEDIUM_RECTANGLE") }
+        xml.xmlSizeSmartBanner.setOnClickListener { showXmlBanner(xml.xmlSmartBanner, "SMART_BANNER") }
     }
 
     private fun showBanner(size: BannerSize, sizeName: String) {
         eventLog.log(getString(R.string.loading_banner, sizeName))
-        binding.bannerContainer.removeAllViews()
+        binding.codeSection.bannerContainer.removeAllViews()
 
         val bannerView = AdiveryBannerAdView(this).apply {
             layoutParams = ViewGroup.LayoutParams(
@@ -65,18 +80,28 @@ class KotlinBannerActivity : AppCompatActivity() {
             )
             setPlacementId(placementId)
             setBannerSize(size)
-            // Loaded banners are displayed by the view itself; the listener is only for reacting.
-            // It belongs to the ad view, not to a global registry, so it is released with the
-            // view and needs no detaching in onDestroy.
-            setBannerAdListener(object : AdiveryAdListener() {
-                override fun onAdLoaded() = eventLog.log("onAdLoaded")
-                override fun onAdShown() = eventLog.log("onAdShown")
-                override fun onAdClicked() = eventLog.log("onAdClicked")
-                override fun onError(reason: String) = eventLog.log("onError: $reason")
-            })
+            setBannerAdListener(listener("code"))
         }
 
-        binding.bannerContainer.addView(bannerView)
+        binding.codeSection.bannerContainer.addView(bannerView)
         bannerView.loadAd()
+    }
+
+    private fun showXmlBanner(banner: AdiveryBannerAdView, sizeName: String) {
+        eventLog.log(getString(R.string.loading_banner, sizeName))
+        xmlBanners.forEach { it.isVisible = it === banner }
+        banner.loadAd()
+    }
+
+    private fun listener(source: String) = object : AdiveryAdListener() {
+        override fun onAdLoaded() = eventLog.log("$source: onAdLoaded")
+        override fun onAdShown() = eventLog.log("$source: onAdShown")
+        override fun onAdClicked() = eventLog.log("$source: onAdClicked")
+        override fun onError(reason: String) = eventLog.log("$source: onError: $reason")
+    }
+
+    private companion object {
+        const val TAB_CODE = 0
+        const val TAB_XML = 1
     }
 }

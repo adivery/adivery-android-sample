@@ -1,6 +1,7 @@
 package com.adivery.sample.javasamples;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.EdgeToEdge;
@@ -13,32 +14,30 @@ import com.adivery.sample.ProfileStore;
 import com.adivery.sample.R;
 import com.adivery.sample.SystemBars;
 import com.adivery.sample.databinding.ActivityBannerAdBinding;
+import com.adivery.sample.databinding.ViewBannerCodeSectionBinding;
+import com.adivery.sample.databinding.ViewBannerXmlSectionBinding;
 import com.adivery.sdk.AdiveryAdListener;
 import com.adivery.sdk.AdiveryBannerAdView;
 import com.adivery.sdk.BannerSize;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Banner ads in Java.
- *
- * <p>A banner can be declared straight in XML:
- *
- * <pre>{@code
- * <com.adivery.sdk.AdiveryBannerAdView
- *     android:layout_width="match_parent"
- *     android:layout_height="wrap_content"
- *     app:placement_id="YOUR_PLACEMENT_ID"
- *     app:banner_size="banner" />
- * }</pre>
- *
- * <p>This screen builds it in code instead, so the four sizes can be swapped at runtime. A fresh
- * view is created per size because {@link AdiveryBannerAdView} reserves space for the size it was
- * loaded with.
+ * Banners can be created in two ways, both in code or directly in XML.
  */
 public class JavaBannerActivity extends AppCompatActivity {
+
+    private static final int TAB_CODE = 0;
+    private static final int TAB_XML = 1;
 
     private ActivityBannerAdBinding binding;
     private AdEventLog eventLog;
     private String placementId;
+
+    private List<AdiveryBannerAdView> xmlBanners;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,47 +53,85 @@ public class JavaBannerActivity extends AppCompatActivity {
         binding.title.setText(R.string.sample_banner_java);
         binding.placementId.setText(getString(R.string.placement_id, placementId));
 
-        binding.sizeBanner.setOnClickListener(v -> showBanner(BannerSize.BANNER, "BANNER"));
-        binding.sizeLargeBanner.setOnClickListener(v -> showBanner(BannerSize.LARGE_BANNER, "LARGE_BANNER"));
-        binding.sizeMediumRectangle.setOnClickListener(v -> showBanner(BannerSize.MEDIUM_RECTANGLE, "MEDIUM_RECTANGLE"));
-        binding.sizeSmartBanner.setOnClickListener(v -> showBanner(BannerSize.SMART_BANNER, "SMART_BANNER"));
+        binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(@NonNull TabLayout.Tab tab) {
+                binding.codeSection.getRoot().setVisibility(tab.getPosition() == TAB_CODE ? View.VISIBLE : View.GONE);
+                binding.xmlSection.getRoot().setVisibility(tab.getPosition() == TAB_XML ? View.VISIBLE : View.GONE);
+            }
+
+            @Override
+            public void onTabUnselected(@NonNull TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(@NonNull TabLayout.Tab tab) {
+            }
+        });
+
+        ViewBannerCodeSectionBinding code = binding.codeSection;
+        code.sizeBanner.setOnClickListener(v -> showBanner(BannerSize.BANNER, "BANNER"));
+        code.sizeLargeBanner.setOnClickListener(v -> showBanner(BannerSize.LARGE_BANNER, "LARGE_BANNER"));
+        code.sizeMediumRectangle.setOnClickListener(v -> showBanner(BannerSize.MEDIUM_RECTANGLE, "MEDIUM_RECTANGLE"));
+        code.sizeSmartBanner.setOnClickListener(v -> showBanner(BannerSize.SMART_BANNER, "SMART_BANNER"));
+
+        ViewBannerXmlSectionBinding xml = binding.xmlSection;
+        xmlBanners = Arrays.asList(xml.xmlBanner, xml.xmlLargeBanner, xml.xmlMediumRectangle, xml.xmlSmartBanner);
+        for (AdiveryBannerAdView banner : xmlBanners) {
+            banner.setPlacementId(placementId);
+            banner.setBannerAdListener(listener("xml"));
+        }
+
+        xml.xmlSizeBanner.setOnClickListener(v -> showXmlBanner(xml.xmlBanner, "BANNER"));
+        xml.xmlSizeLargeBanner.setOnClickListener(v -> showXmlBanner(xml.xmlLargeBanner, "LARGE_BANNER"));
+        xml.xmlSizeMediumRectangle.setOnClickListener(v -> showXmlBanner(xml.xmlMediumRectangle, "MEDIUM_RECTANGLE"));
+        xml.xmlSizeSmartBanner.setOnClickListener(v -> showXmlBanner(xml.xmlSmartBanner, "SMART_BANNER"));
     }
 
     private void showBanner(BannerSize size, String sizeName) {
         eventLog.log(getString(R.string.loading_banner, sizeName));
-        binding.bannerContainer.removeAllViews();
+        binding.codeSection.bannerContainer.removeAllViews();
 
         AdiveryBannerAdView bannerView = new AdiveryBannerAdView(this);
         bannerView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         bannerView.setPlacementId(placementId);
         bannerView.setBannerSize(size);
-        // Loaded banners are displayed by the view itself; the listener is only for reacting.
-        // It belongs to the ad view, not to a global registry, so it is released with the
-        // view and needs no detaching in onDestroy.
-        bannerView.setBannerAdListener(new AdiveryAdListener() {
+        bannerView.setBannerAdListener(listener("code"));
+
+        binding.codeSection.bannerContainer.addView(bannerView);
+        bannerView.loadAd();
+    }
+
+    private void showXmlBanner(AdiveryBannerAdView banner, String sizeName) {
+        eventLog.log(getString(R.string.loading_banner, sizeName));
+        for (AdiveryBannerAdView candidate : xmlBanners) {
+            candidate.setVisibility(candidate == banner ? View.VISIBLE : View.GONE);
+        }
+        banner.loadAd();
+    }
+
+    private AdiveryAdListener listener(String source) {
+        return new AdiveryAdListener() {
             @Override
             public void onAdLoaded() {
-                eventLog.log("onAdLoaded");
+                eventLog.log(source + ": onAdLoaded");
             }
 
             @Override
             public void onAdShown() {
-                eventLog.log("onAdShown");
+                eventLog.log(source + ": onAdShown");
             }
 
             @Override
             public void onAdClicked() {
-                eventLog.log("onAdClicked");
+                eventLog.log(source + ": onAdClicked");
             }
 
             @Override
             public void onError(@NonNull String reason) {
-                eventLog.log("onError: " + reason);
+                eventLog.log(source + ": onError: " + reason);
             }
-        });
-
-        binding.bannerContainer.addView(bannerView);
-        bannerView.loadAd();
+        };
     }
 }

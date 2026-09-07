@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   Shared by the Kotlin and the Java banner samples.
 
-  The banner view itself is created in code so the four sizes can be swapped at runtime; see the
-  activity for the equivalent XML declaration.
+  One tab per way of getting a banner on screen, each offering the same four sizes.
+
+  * @layout/view_banner_code_section builds an AdiveryBannerAdView per tap and has no Adivery views
+    of its own.
+  * @layout/view_banner_xml_section declares one AdiveryBannerAdView per size and needs almost no
+    code at all.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,61 +31,33 @@
         android:textAppearance="?attr/textAppearanceBodySmall"
         tools:text="Placement: 5f2c4c86-a6ec-4735-9a44-f881fe40789f" />
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        app:tabGravity="fill"
+        app:tabMode="fixed">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/size_banner"
-            android:layout_width="0dp"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:text="@string/banner_size_banner" />
+            android:text="@string/section_banner_in_code" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/size_large_banner"
-            android:layout_width="0dp"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:text="@string/banner_size_large" />
+            android:text="@string/section_banner_in_xml" />
 
-    </LinearLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
+    <include
+        android:id="@+id/code_section"
+        layout="@layout/view_banner_code_section" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/size_medium_rectangle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:text="@string/banner_size_medium_rectangle" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/size_smart_banner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:text="@string/banner_size_smart" />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/banner_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:minHeight="50dp" />
+    <include
+        android:id="@+id/xml_section"
+        layout="@layout/view_banner_xml_section" />
 
     <TextView
         android:layout_width="match_parent"

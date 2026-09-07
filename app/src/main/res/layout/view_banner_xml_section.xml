@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  The "declared in XML" tab of the banner samples, included by activity_banner_ad.xml.
+
+  One AdiveryBannerAdView per size, each carrying its own app:banner_size — the same four values
+  BannerSize offers in code. There is a view per size rather than one view that gets re-sized.
+
+  The placement id is set in code because it comes from the profile the sample is running as. In an
+  app with a fixed placement id there is nothing left for code to do but call loadAd():
+
+    <com.adivery.sdk.AdiveryBannerAdView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:placement_id="YOUR_PLACEMENT_ID"
+        app:banner_size="banner" />
+
+  Note that app:banner_size and app:placement_id only configure the view. Nothing is requested until
+  loadAd() is called.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/xml_size_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:text="@string/banner_size_banner" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/xml_size_large_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:text="@string/banner_size_large" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/xml_size_medium_rectangle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:text="@string/banner_size_medium_rectangle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/xml_size_smart_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:text="@string/banner_size_smart" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:minHeight="50dp">
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/xml_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:banner_size="banner"
+            tools:visibility="visible" />
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/xml_large_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:banner_size="large_banner" />
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/xml_medium_rectangle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:banner_size="medium_rectangle" />
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/xml_smart_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:banner_size="smart_banner" />
+
+    </FrameLayout>
+
+</LinearLayout>

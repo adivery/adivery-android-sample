@@ -46,6 +46,8 @@
     <string name="banner_size_large">Large 320×100</string>
     <string name="banner_size_medium_rectangle">Rectangle 300×250</string>
     <string name="banner_size_smart">Smart banner</string>
+    <string name="section_banner_in_code">Created in code</string>
+    <string name="section_banner_in_xml">Declared in XML</string>
 
     <!-- Profile creation -->
     <string name="create_profile">New profile</string>
