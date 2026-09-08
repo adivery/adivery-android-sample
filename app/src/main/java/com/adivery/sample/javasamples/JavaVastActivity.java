@@ -91,8 +91,6 @@ public class JavaVastActivity extends AppCompatActivity {
         }
 
         if (attempt > MAX_ATTEMPTS) {
-            // Playing the content without a pre-roll beats making the user wait for an ad that is
-            // not coming.
             eventLog.log(getString(R.string.vast_url_unavailable));
             startPlayback(null);
             return;
@@ -102,26 +100,19 @@ public class JavaVastActivity extends AppCompatActivity {
         handler.postDelayed(() -> awaitVastUrl(attempt + 1), RETRY_DELAY_MS);
     }
 
-    /** Plays {@link #CONTENT_URL}, preceded by the ad in {@code vastUrl} when there is one. */
     @OptIn(markerClass = UnstableApi.class)
     private void startPlayback(@Nullable String vastUrl) {
-        // Released first so pressing play twice restarts from a clean player rather than resuming a
-        // stream whose ad has already been played.
         releasePlayer();
 
         ExoPlayer.Builder playerBuilder = new ExoPlayer.Builder(this);
         MediaItem.Builder mediaItemBuilder = new MediaItem.Builder().setUri(CONTENT_URL);
 
-        // Without a url there is no ad to insert, so IMA is left out of the graph entirely rather
-        // than attached with nothing to serve.
         if (vastUrl != null) {
             adsLoader = buildAdsLoader();
 
             mediaItemBuilder.setAdsConfiguration(
                     new MediaItem.AdsConfiguration.Builder(Uri.parse(vastUrl)).build());
 
-            // Replaces the deprecated setAdsLoaderProvider/setAdViewProvider pair: the factory needs
-            // the loader that inserts the ad and the view it is rendered over.
             playerBuilder.setMediaSourceFactory(new DefaultMediaSourceFactory(this)
                     .setLocalAdInsertionComponents(unusedAdTagUri -> adsLoader, binding.playerView));
         }
@@ -180,7 +171,6 @@ public class JavaVastActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        // The retry runnable holds this activity, so it has to go with the player.
         handler.removeCallbacksAndMessages(null);
         releasePlayer();
         super.onDestroy();

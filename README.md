@@ -53,8 +53,8 @@ player able to read it.
 
 ```kotlin
 dependencies {
-    implementation("androidx.media3:media3-exoplayer:1.3.1")
-    implementation("androidx.media3:media3-ui:1.3.1")
-    implementation("androidx.media3:media3-exoplayer-ima:1.3.1")
+    implementation("androidx.media3:media3-exoplayer:1.8.1")
+    implementation("androidx.media3:media3-ui:1.8.1")
+    implementation("androidx.media3:media3-exoplayer-ima:1.8.1")
 }
 ```

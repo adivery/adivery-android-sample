@@ -72,8 +72,6 @@ class KotlinVastActivity : AppCompatActivity() {
         }
 
         if (attempt > MAX_ATTEMPTS) {
-            // Playing the content without a pre-roll beats making the user wait for an ad that is
-            // not coming.
             eventLog.log(getString(R.string.vast_url_unavailable))
             startPlayback(vastUrl = null)
             return
@@ -86,15 +84,10 @@ class KotlinVastActivity : AppCompatActivity() {
     /** Plays [CONTENT_URL], preceded by the ad in [vastUrl] when there is one. */
     @OptIn(UnstableApi::class)
     private fun startPlayback(vastUrl: String?) {
-        // Released first so pressing play twice restarts from a clean player rather than resuming a
-        // stream whose ad has already been played.
         releasePlayer()
 
         val playerBuilder = ExoPlayer.Builder(this)
         val mediaItemBuilder = MediaItem.Builder().setUri(CONTENT_URL)
-
-        // Without a url there is no ad to insert, so IMA is left out of the graph entirely rather
-        // than attached with nothing to serve.
         if (vastUrl != null) {
             val adsLoader = buildAdsLoader()
             this.adsLoader = adsLoader
@@ -103,8 +96,6 @@ class KotlinVastActivity : AppCompatActivity() {
                 MediaItem.AdsConfiguration.Builder(vastUrl.toUri()).build()
             )
 
-            // Replaces the deprecated setAdsLoaderProvider/setAdViewProvider pair: the factory needs
-            // the loader that inserts the ad and the view it is rendered over.
             playerBuilder.setMediaSourceFactory(
                 DefaultMediaSourceFactory(this)
                     .setLocalAdInsertionComponents({ adsLoader }, binding.playerView)
@@ -143,7 +134,7 @@ class KotlinVastActivity : AppCompatActivity() {
     /** The 320×50 slot IMA draws the banner accompanying the video into. */
     @OptIn(UnstableApi::class)
     private fun companionAdSlot() = ImaSdkFactory.getInstance().createCompanionAdSlot().apply {
-        setContainer(binding.companionAdSlot)
+        container = binding.companionAdSlot
         setSize(COMPANION_WIDTH, COMPANION_HEIGHT)
     }
 
@@ -177,7 +168,6 @@ class KotlinVastActivity : AppCompatActivity() {
     }
 
     private companion object {
-        /** Stands in for the video the app would normally be playing. */
         const val CONTENT_URL =
             "https://cdn.adivery.com/media/native/c2c76c3b-24ad-4cd3-a31c-009264681765-converted/360p.mp4"
 
