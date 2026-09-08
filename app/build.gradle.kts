@@ -4,13 +4,13 @@ plugins {
 
 android {
     namespace = "com.adivery.sample"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.adivery.sample"
         // The Adivery SDK requires minSdk 21 or above.
         minSdk = 21
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
