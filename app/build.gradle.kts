@@ -41,6 +41,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.material)
+    // The Adivery SDK reads the Google Advertising ID (GAID) via AdvertisingIdClient
+    // to pass it to ad networks for better ad targeting. Fetching the user's GAID only
+    // happens when this artifact is on the classpath, so the publisher app must declare
+    // it explicitly, or the GAID will not be sent.
+    implementation(libs.play.services.ads.identifier)
     // Only the Pre-Roll (VAST) sample needs these: ExoPlayer plays the content, its IMA extension
     // reads the VAST url Adivery hands out and inserts the ad before it.
     implementation(libs.media3.exoplayer)
