@@ -1,0 +1,111 @@
+name: Release sample app
+
+# Builds the sample and publishes a GitHub release whenever the app's version is bumped.
+#
+# "The version changed" is decided by tag existence, not by diffing against the previous commit:
+# `github.event.before` is empty on branch creation and misleading after a force-push, and a bump
+# that lands in the middle of a multi-commit push would be missed by looking at HEAD^ alone.
+# Asking "is there already a tag for this version?" is idempotent — re-running the workflow on an
+# already-released version is a no-op instead of a duplicate release.
+on:
+  push:
+    branches: [master]
+    paths: ['app/build.gradle.kts']
+  # So the workflow can be exercised before it is merged to master, and re-run by hand.
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Build only; do not create the release'
+        type: boolean
+        default: true
+
+# Required to create the tag and the release; the default token is read-only on most repos.
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Tags are needed to tell an already-released version from a new one.
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: Read version from app/build.gradle.kts
+        id: version
+        run: |
+          set -euo pipefail
+          # Cheaper than a Gradle task: printing these two values would cost a full configuration phase.
+          # `|| true` so an unparseable file reaches the explicit error below instead of dying on set -e.
+          version_code=$(grep -oP '^\s*versionCode\s*=\s*\K[0-9]+' app/build.gradle.kts || true)
+          version_name=$(grep -oP '^\s*versionName\s*=\s*"\K[^"]+' app/build.gradle.kts || true)
+          if [ -z "$version_code" ] || [ -z "$version_name" ]; then
+            echo "Could not parse versionCode/versionName from app/build.gradle.kts" >&2
+            exit 1
+          fi
+          echo "code=$version_code" >> "$GITHUB_OUTPUT"
+          echo "name=$version_name" >> "$GITHUB_OUTPUT"
+          # Both values are in the tag, so bumping either one alone still produces a new release.
+          echo "tag=v$version_name-$version_code" >> "$GITHUB_OUTPUT"
+          echo "Found versionName=$version_name versionCode=$version_code"
+
+      - name: Skip if this version is already released
+        id: check
+        run: |
+          set -euo pipefail
+          tag='${{ steps.version.outputs.tag }}'
+          if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+            echo "Tag $tag already exists — version was not bumped, nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-java@v4
+        if: steps.check.outputs.release == 'true'
+        with:
+          distribution: temurin
+          # Matches the JDK the project builds with locally.
+          java-version: '21'
+
+      - uses: gradle/actions/setup-gradle@v4
+        if: steps.check.outputs.release == 'true'
+
+      - name: Build APK
+        if: steps.check.outputs.release == 'true'
+        # The app declares no signingConfig, so `assembleRelease` would emit an unsigned APK that
+        # nobody can install. The debug APK is signed with the standard debug key and is directly
+        # installable, which is what a sample app's release page should hand out.
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Locate the APK
+        id: apk
+        if: steps.check.outputs.release == 'true'
+        run: |
+          set -euo pipefail
+          # Globbed rather than hardcoded on AGP's output layout, but scoped to the debug variant so
+          # a stray unsigned release APK in the outputs tree can never be picked up instead.
+          apk=$(find app/build/outputs -path '*/debug/*' -name '*.apk' -print -quit)
+          if [ -z "$apk" ]; then
+            echo "No APK produced by the build" >&2
+            exit 1
+          fi
+          target="adivery-sample-${{ steps.version.outputs.name }}.apk"
+          mv "$apk" "$target"
+          echo "path=$target" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        # `inputs` is unset on push, so `!= true` lets real bumps publish while a manual run
+        # defaults to build-and-verify only — a test dispatch must not tag an unmerged commit.
+        if: steps.check.outputs.release == 'true' && inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create '${{ steps.version.outputs.tag }}' \
+            --target '${{ github.sha }}' \
+            --title 'Adivery sample ${{ steps.version.outputs.name }} (${{ steps.version.outputs.code }})' \
+            --generate-notes \
+            '${{ steps.apk.outputs.path }}'
