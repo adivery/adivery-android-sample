@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Shared by the Kotlin and the Java banner samples.
+
+  One tab per way of getting a banner on screen, each offering the same four sizes.
+
+  * @layout/view_banner_code_section builds an AdiveryBannerAdView per tap and has no Adivery views
+    of its own.
+  * @layout/view_banner_xml_section declares one AdiveryBannerAdView per size and needs almost no
+    code at all.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        tools:text="Banner · Kotlin" />
+
+    <TextView
+        android:id="@+id/placement_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        tools:text="Placement: 5f2c4c86-a6ec-4735-9a44-f881fe40789f" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/section_banner_in_code" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/section_banner_in_xml" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <include
+        android:id="@+id/code_section"
+        layout="@layout/view_banner_code_section" />
+
+    <include
+        android:id="@+id/xml_section"
+        layout="@layout/view_banner_xml_section" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/section_callbacks"
+        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textIsSelectable="true" />
+
+    </ScrollView>
+
+</LinearLayout>

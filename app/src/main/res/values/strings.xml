@@ -1,24 +1,86 @@
 <resources>
-    <string name="app_name">AdiverySample</string>
-    <string name="banner">Banner</string>
-    <string name="large_banner">Large Banner</string>
-    <string name="medium_rectangle">Medium Rectangle</string>
-    <string name="interstitial">interstitial</string>
-    <string name="rewarded">rewarded</string>
-    <string name="name_native">native</string>
-    <string name="create_profile">Create a new profile</string>
-    <string name="hint_app_id">Application Id</string>
-    <string name="hint_banner">Banner Placement Id</string>
-    <string name="hint_native">Native Placement Id</string>
-    <string name="hint_interstitial">Interstitial Placement Id</string>
-    <string name="hint_app_open">AppOpen Placement Id</string>
-    <string name="hint_rewarded">Rewarded Placement Id</string>
-    <string name="create">CREATE</string>
+    <string name="app_name">Adivery Sample</string>
+
+    <!-- Home screen -->
+    <string name="section_profile">Profile</string>
+    <string name="section_profile_description">The application id and placement ids the SDK is configured with.</string>
+    <string name="section_language">Language</string>
+    <string name="section_language_description">Each placement type is implemented twice, once in Kotlin and once in Java. Pick which implementation the buttons below open.</string>
+    <string name="section_placements">Placement types</string>
+    <string name="section_callbacks">Callbacks</string>
+    <string name="active_profile">Running as \"%1$s\" · app id %2$s</string>
+    <string name="apply_profile">Apply</string>
+    <string name="language_kotlin">Kotlin</string>
+    <string name="language_java">Java</string>
+    <string name="section_compose">Jetpack Compose</string>
+    <string name="sample_compose">Compose showcase</string>
+
+    <!-- Placement types -->
+    <string name="sample_interstitial">Interstitial</string>
+    <string name="sample_rewarded">Rewarded</string>
+    <string name="sample_app_open">App open</string>
+    <string name="sample_banner">Banner</string>
+    <string name="sample_native">Native</string>
+    <string name="sample_vast">Pre-Roll (VAST)</string>
+
+    <string name="sample_interstitial_kotlin">Interstitial · Kotlin</string>
+    <string name="sample_rewarded_kotlin">Rewarded · Kotlin</string>
+    <string name="sample_app_open_kotlin">App open · Kotlin</string>
+    <string name="sample_banner_kotlin">Banner · Kotlin</string>
+    <string name="sample_native_kotlin">Native · Kotlin</string>
+    <string name="sample_vast_kotlin">Pre-Roll (VAST) · Kotlin</string>
+
+    <string name="sample_interstitial_java">Interstitial · Java</string>
+    <string name="sample_rewarded_java">Rewarded · Java</string>
+    <string name="sample_app_open_java">App open · Java</string>
+    <string name="sample_banner_java">Banner · Java</string>
+    <string name="sample_native_java">Native · Java</string>
+    <string name="sample_vast_java">Pre-Roll (VAST) · Java</string>
+
+    <string name="sample_compose_title">Compose showcase</string>
+    <string name="section_compose_banner">Banner · AndroidView</string>
+    <string name="section_compose_native">Native · AndroidView</string>
+    <string name="section_compose_interstitial">Interstitial · DisposableEffect</string>
+
+    <!-- Ad screens -->
+    <string name="placement_id">Placement: %1$s</string>
+    <string name="request_ad">Request ad</string>
+    <string name="show_ad">Show ad</string>
+    <string name="ad_not_ready">Ad is not ready yet</string>
+    <string name="reward_granted">Reward granted</string>
+    <string name="auto_show_on_return">Show on return to the app</string>
+    <string name="auto_show_on">Auto show enabled: leave the app for more than 5 seconds and come back</string>
+    <string name="auto_show_off">Auto show disabled</string>
+    <string name="loading_banner">Loading %1$s</string>
+    <string name="banner_size_banner">Banner 320×50</string>
+    <string name="banner_size_large">Large 320×100</string>
+    <string name="banner_size_medium_rectangle">Rectangle 300×250</string>
+    <string name="banner_size_smart">Smart banner</string>
+    <string name="section_banner_in_code">Created in code</string>
+    <string name="section_banner_in_xml">Declared in XML</string>
+    <string name="play_video">Play video</string>
+    <string name="waiting_for_vast_url">Waiting for the VAST url (attempt %1$d of %2$d)</string>
+    <string name="vast_url_ready">VAST url ready: %1$s</string>
+    <string name="vast_url_unavailable">Gave up waiting for the VAST url, playing the content without an ad</string>
+
+    <!-- Profile creation -->
+    <string name="create_profile">New profile</string>
+    <string name="create_profile_description">Run the sample against your own credentials from the Adivery publisher dashboard.</string>
+    <string name="hint_profile">Profile name</string>
+    <string name="hint_app_id">Application id</string>
+    <string name="hint_interstitial">Interstitial placement id</string>
+    <string name="hint_rewarded">Rewarded placement id</string>
+    <string name="hint_app_open">App open placement id</string>
+    <string name="hint_banner">Banner placement id</string>
+    <string name="hint_native">Native placement id</string>
+    <string name="hint_vast">Pre-Roll (VAST) placement id</string>
+    <string name="create">Create</string>
     <string name="error_invalid_uuid">This field must be a valid uuid</string>
-    <string name="profile_name">Profile name</string>
     <string name="error_empty">This field cannot be empty</string>
+    <string name="error_profile_exists">A profile with this name already exists</string>
     <string name="message_profile_created">Profile created</string>
-    <string name="configure">configure</string>
-    <string name="create_profile_button">Create profile</string>
-    <string name="select_profile_text">Select a profile to continue</string>
+    <string name="restart_required_title">Restart required</string>
+    <string name="restart_required_message">Adivery.configure runs once per process, so the sample has to restart to run as \"%1$s\".</string>
+    <string name="restart_now">Restart now</string>
+    <string name="later">Later</string>
 </resources>
