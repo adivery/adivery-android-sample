@@ -30,42 +30,42 @@
 
         <!-- Kotlin samples -->
         <activity
-            android:name=".kotlinsamples.KotlinInterstitialActivity"
+            android:name=".kotlin.KotlinInterstitialActivity"
             android:exported="false" />
         <activity
-            android:name=".kotlinsamples.KotlinRewardedActivity"
+            android:name=".kotlin.KotlinRewardedActivity"
             android:exported="false" />
         <activity
-            android:name=".kotlinsamples.KotlinAppOpenActivity"
+            android:name=".kotlin.KotlinAppOpenActivity"
             android:exported="false" />
         <activity
-            android:name=".kotlinsamples.KotlinBannerActivity"
+            android:name=".kotlin.KotlinBannerActivity"
             android:exported="false" />
         <activity
-            android:name=".kotlinsamples.KotlinNativeActivity"
+            android:name=".kotlin.KotlinNativeActivity"
             android:exported="false" />
         <activity
-            android:name=".kotlinsamples.KotlinVastActivity"
+            android:name=".kotlin.KotlinVastActivity"
             android:exported="false" />
 
         <!-- Java samples -->
         <activity
-            android:name=".javasamples.JavaInterstitialActivity"
+            android:name=".java.JavaInterstitialActivity"
             android:exported="false" />
         <activity
-            android:name=".javasamples.JavaRewardedActivity"
+            android:name=".java.JavaRewardedActivity"
             android:exported="false" />
         <activity
-            android:name=".javasamples.JavaAppOpenActivity"
+            android:name=".java.JavaAppOpenActivity"
             android:exported="false" />
         <activity
-            android:name=".javasamples.JavaBannerActivity"
+            android:name=".java.JavaBannerActivity"
             android:exported="false" />
         <activity
-            android:name=".javasamples.JavaNativeActivity"
+            android:name=".java.JavaNativeActivity"
             android:exported="false" />
         <activity
-            android:name=".javasamples.JavaVastActivity"
+            android:name=".java.JavaVastActivity"
             android:exported="false" />
 
     </application>

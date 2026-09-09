@@ -1,4 +1,4 @@
-package com.adivery.sample.javasamples;
+package com.adivery.sample.java;
 
 import android.net.Uri;
 import android.os.Bundle;

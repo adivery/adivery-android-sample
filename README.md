@@ -10,12 +10,12 @@ Full documentation: <https://adivery.com/android>
 
 | Placement    | Kotlin                                                                                            | Java                                                                                        |
 |--------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| Interstitial | [`KotlinInterstitialActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinInterstitialActivity.kt) | [`JavaInterstitialActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaInterstitialActivity.java) |
-| Rewarded     | [`KotlinRewardedActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinRewardedActivity.kt)         | [`JavaRewardedActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaRewardedActivity.java)         |
-| App open     | [`KotlinAppOpenActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinAppOpenActivity.kt)           | [`JavaAppOpenActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaAppOpenActivity.java)           |
-| Banner       | [`KotlinBannerActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinBannerActivity.kt)             | [`JavaBannerActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaBannerActivity.java)             |
-| Native       | [`KotlinNativeActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinNativeActivity.kt)             | [`JavaNativeActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaNativeActivity.java)             |
-| Pre-Roll (VAST) | [`KotlinVastActivity`](app/src/main/java/com/adivery/sample/kotlinsamples/KotlinVastActivity.kt)              | [`JavaVastActivity`](app/src/main/java/com/adivery/sample/javasamples/JavaVastActivity.java)                 |
+| Interstitial | [`KotlinInterstitialActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinInterstitialActivity.kt) | [`JavaInterstitialActivity`](app/src/main/java/com/adivery/sample/java/JavaInterstitialActivity.java) |
+| Rewarded     | [`KotlinRewardedActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinRewardedActivity.kt)         | [`JavaRewardedActivity`](app/src/main/java/com/adivery/sample/java/JavaRewardedActivity.java)         |
+| App open     | [`KotlinAppOpenActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinAppOpenActivity.kt)           | [`JavaAppOpenActivity`](app/src/main/java/com/adivery/sample/java/JavaAppOpenActivity.java)           |
+| Banner       | [`KotlinBannerActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinBannerActivity.kt)             | [`JavaBannerActivity`](app/src/main/java/com/adivery/sample/java/JavaBannerActivity.java)             |
+| Native       | [`KotlinNativeActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinNativeActivity.kt)             | [`JavaNativeActivity`](app/src/main/java/com/adivery/sample/java/JavaNativeActivity.java)             |
+| Pre-Roll (VAST) | [`KotlinVastActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinVastActivity.kt)              | [`JavaVastActivity`](app/src/main/java/com/adivery/sample/java/JavaVastActivity.java)                 |
 
 Each screen requests an ad, shows it, and prints every SDK callback it receives so the ad lifecycle
 is visible while the sample runs.

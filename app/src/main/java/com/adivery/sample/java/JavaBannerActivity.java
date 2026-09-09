@@ -1,4 +1,4 @@
-package com.adivery.sample.javasamples;
+package com.adivery.sample.java;
 
 import android.os.Bundle;
 import android.view.View;

@@ -2,18 +2,18 @@ package com.adivery.sample
 
 import android.app.Activity
 import androidx.annotation.StringRes
-import com.adivery.sample.javasamples.JavaAppOpenActivity
-import com.adivery.sample.javasamples.JavaBannerActivity
-import com.adivery.sample.javasamples.JavaInterstitialActivity
-import com.adivery.sample.javasamples.JavaNativeActivity
-import com.adivery.sample.javasamples.JavaRewardedActivity
-import com.adivery.sample.javasamples.JavaVastActivity
-import com.adivery.sample.kotlinsamples.KotlinAppOpenActivity
-import com.adivery.sample.kotlinsamples.KotlinBannerActivity
-import com.adivery.sample.kotlinsamples.KotlinInterstitialActivity
-import com.adivery.sample.kotlinsamples.KotlinNativeActivity
-import com.adivery.sample.kotlinsamples.KotlinRewardedActivity
-import com.adivery.sample.kotlinsamples.KotlinVastActivity
+import com.adivery.sample.java.JavaAppOpenActivity
+import com.adivery.sample.java.JavaBannerActivity
+import com.adivery.sample.java.JavaInterstitialActivity
+import com.adivery.sample.java.JavaNativeActivity
+import com.adivery.sample.java.JavaRewardedActivity
+import com.adivery.sample.java.JavaVastActivity
+import com.adivery.sample.kotlin.KotlinAppOpenActivity
+import com.adivery.sample.kotlin.KotlinBannerActivity
+import com.adivery.sample.kotlin.KotlinInterstitialActivity
+import com.adivery.sample.kotlin.KotlinNativeActivity
+import com.adivery.sample.kotlin.KotlinRewardedActivity
+import com.adivery.sample.kotlin.KotlinVastActivity
 
 /** The language a sample is written in. Both implementations behave identically. */
 enum class SampleLanguage { KOTLIN, JAVA }

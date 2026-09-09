@@ -1,4 +1,4 @@
-package com.adivery.sample.kotlinsamples
+package com.adivery.sample.kotlin
 
 import android.os.Bundle
 import android.os.Handler
