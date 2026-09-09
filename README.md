@@ -20,6 +20,19 @@ Full documentation: <https://adivery.com/android>
 Each screen requests an ad, shows it, and prints every SDK callback it receives so the ad lifecycle
 is visible while the sample runs.
 
+## Jetpack Compose
+
+Adivery has no Compose artifact and does not need one, so instead of repeating all six placements a
+third time the sample covers only the parts where Compose changes the integration:
+
+| File | What it shows |
+|------|---------------|
+| [`AdiveryCompose.kt`](app/src/main/java/com/adivery/sample/compose/AdiveryCompose.kt) | `AdiveryBanner` and `AdiveryNativeAd` — the whole interop layer, since banner and native placements are Views and Compose hosts them with `AndroidView`. Copy this file into your app as is |
+| [`ComposeShowcaseActivity.kt`](app/src/main/java/com/adivery/sample/compose/ComposeShowcaseActivity.kt) | Those two composables in use, plus an interstitial whose listener is registered and released by a `DisposableEffect` |
+
+Interstitial, rewarded, app open and Pre-Roll are the same static `Adivery` calls from Compose as
+from a View, so only the interstitial is repeated here; the rest are left to the screens above.
+
 ## Supporting code
 
 | File | What it shows |
@@ -56,5 +69,22 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer:1.8.1")
     implementation("androidx.media3:media3-ui:1.8.1")
     implementation("androidx.media3:media3-exoplayer-ima:1.8.1")
+}
+```
+
+The Compose screen brings Compose itself, which nothing else in the sample uses. Note that
+`buildFeatures.compose = true` is not sufficient on its own — since Kotlin 2.0 the Compose compiler
+is a separate Gradle plugin, and it has to be pinned to the Kotlin version your AGP builds with
+(`./gradlew :app:dependencies` reports it as `kotlin-stdlib`).
+
+```kotlin
+plugins {
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
+}
+
+dependencies {
+    implementation(platform("androidx.compose:compose-bom:2024.12.01"))
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.activity:activity-compose:1.9.3")
 }
 ```

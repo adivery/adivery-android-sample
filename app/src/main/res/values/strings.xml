@@ -12,6 +12,9 @@
     <string name="apply_profile">Apply</string>
     <string name="language_kotlin">Kotlin</string>
     <string name="language_java">Java</string>
+    <string name="section_compose">Jetpack Compose</string>
+    <string name="section_compose_description">One screen covering the parts that differ under Compose: banner and native hosted in AndroidView, and a full screen placement whose listener lives in a DisposableEffect.</string>
+    <string name="sample_compose">Compose showcase</string>
 
     <!-- Placement types -->
     <string name="sample_interstitial">Interstitial</string>
@@ -34,6 +37,11 @@
     <string name="sample_banner_java">Banner · Java</string>
     <string name="sample_native_java">Native · Java</string>
     <string name="sample_vast_java">Pre-Roll (VAST) · Java</string>
+
+    <string name="sample_compose_title">Compose showcase</string>
+    <string name="section_compose_banner">Banner · AndroidView</string>
+    <string name="section_compose_native">Native · AndroidView</string>
+    <string name="section_compose_interstitial">Interstitial · DisposableEffect</string>
 
     <!-- Ad screens -->
     <string name="placement_id">Placement: %1$s</string>

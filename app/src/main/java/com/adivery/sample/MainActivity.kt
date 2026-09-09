@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.adivery.sample.compose.ComposeShowcaseActivity
 import com.adivery.sample.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         binding.banner.setOnClickListener { open(AdSample.BANNER) }
         binding.nativeAd.setOnClickListener { open(AdSample.NATIVE) }
         binding.vast.setOnClickListener { open(AdSample.VAST) }
+        binding.composeShowcase.setOnClickListener {
+            startActivity(Intent(this, ComposeShowcaseActivity::class.java))
+        }
     }
 
     override fun onResume() {

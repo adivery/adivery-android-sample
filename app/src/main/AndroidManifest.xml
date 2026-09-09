@@ -68,6 +68,11 @@
             android:name=".java.JavaVastActivity"
             android:exported="false" />
 
+        <!-- Compose sample -->
+        <activity
+            android:name=".compose.ComposeShowcaseActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
