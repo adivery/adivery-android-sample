@@ -15,6 +15,8 @@ data class AdProfile(
     val bannerPlacementId: String,
     val nativePlacementId: String,
     val vastPlacementId: String,
+    /** Empty when the application has no offer wall, which Adivery support enables per application. */
+    val offerWallPlacementId: String,
 ) {
     companion object {
 
@@ -28,6 +30,7 @@ data class AdProfile(
             bannerPlacementId = "d47ebd8b-269e-4e59-ba12-3b83326ef351",
             nativePlacementId = "b607ef9a-3218-4a7c-9c34-a91f9888c7e7",
             vastPlacementId = "a750d453-bc0f-4006-8346-d398fcf34a50",
+            offerWallPlacementId = "9cad440a-8271-49d2-8f81-0819268a5ce4",
         )
     }
 }

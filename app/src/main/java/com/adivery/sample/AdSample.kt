@@ -6,12 +6,14 @@ import com.adivery.sample.java.JavaAppOpenActivity
 import com.adivery.sample.java.JavaBannerActivity
 import com.adivery.sample.java.JavaInterstitialActivity
 import com.adivery.sample.java.JavaNativeActivity
+import com.adivery.sample.java.JavaOfferWallActivity
 import com.adivery.sample.java.JavaRewardedActivity
 import com.adivery.sample.java.JavaVastActivity
 import com.adivery.sample.kotlin.KotlinAppOpenActivity
 import com.adivery.sample.kotlin.KotlinBannerActivity
 import com.adivery.sample.kotlin.KotlinInterstitialActivity
 import com.adivery.sample.kotlin.KotlinNativeActivity
+import com.adivery.sample.kotlin.KotlinOfferWallActivity
 import com.adivery.sample.kotlin.KotlinRewardedActivity
 import com.adivery.sample.kotlin.KotlinVastActivity
 
@@ -40,6 +42,11 @@ enum class AdSample(
         R.string.sample_app_open,
         KotlinAppOpenActivity::class.java,
         JavaAppOpenActivity::class.java,
+    ),
+    OFFER_WALL(
+        R.string.sample_offer_wall,
+        KotlinOfferWallActivity::class.java,
+        JavaOfferWallActivity::class.java,
     ),
     BANNER(
         R.string.sample_banner,

@@ -13,6 +13,7 @@ Full documentation: <https://adivery.com/android>
 | Interstitial | [`KotlinInterstitialActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinInterstitialActivity.kt) | [`JavaInterstitialActivity`](app/src/main/java/com/adivery/sample/java/JavaInterstitialActivity.java) |
 | Rewarded     | [`KotlinRewardedActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinRewardedActivity.kt)         | [`JavaRewardedActivity`](app/src/main/java/com/adivery/sample/java/JavaRewardedActivity.java)         |
 | App open     | [`KotlinAppOpenActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinAppOpenActivity.kt)           | [`JavaAppOpenActivity`](app/src/main/java/com/adivery/sample/java/JavaAppOpenActivity.java)           |
+| Offer wall   | [`KotlinOfferWallActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinOfferWallActivity.kt)       | [`JavaOfferWallActivity`](app/src/main/java/com/adivery/sample/java/JavaOfferWallActivity.java)       |
 | Banner       | [`KotlinBannerActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinBannerActivity.kt)             | [`JavaBannerActivity`](app/src/main/java/com/adivery/sample/java/JavaBannerActivity.java)             |
 | Native       | [`KotlinNativeActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinNativeActivity.kt)             | [`JavaNativeActivity`](app/src/main/java/com/adivery/sample/java/JavaNativeActivity.java)             |
 | Pre-Roll (VAST) | [`KotlinVastActivity`](app/src/main/java/com/adivery/sample/kotlin/KotlinVastActivity.kt)              | [`JavaVastActivity`](app/src/main/java/com/adivery/sample/java/JavaVastActivity.java)                 |
@@ -20,9 +21,12 @@ Full documentation: <https://adivery.com/android>
 Each screen requests an ad, shows it, and prints every SDK callback it receives so the ad lifecycle
 is visible while the sample runs.
 
+The offer wall works differently from the other full screen formats. It is loaded only when the user
+taps its button and shown as soon as it loads, and only while the user is still waiting for it.
+
 ## Jetpack Compose
 
-Adivery has no Compose artifact and does not need one, so instead of repeating all six placements a
+Adivery has no Compose artifact and does not need one, so instead of repeating all seven placements a
 third time the sample covers only the parts where Compose changes the integration:
 
 | File | What it shows |
@@ -30,8 +34,9 @@ third time the sample covers only the parts where Compose changes the integratio
 | [`AdiveryCompose.kt`](app/src/main/java/com/adivery/sample/compose/AdiveryCompose.kt) | `AdiveryBanner` and `AdiveryNativeAd` — the whole interop layer, since banner and native placements are Views and Compose hosts them with `AndroidView`. Copy this file into your app as is |
 | [`ComposeShowcaseActivity.kt`](app/src/main/java/com/adivery/sample/compose/ComposeShowcaseActivity.kt) | Those two composables in use, plus an interstitial whose listener is registered and released by a `DisposableEffect` |
 
-Interstitial, rewarded, app open and Pre-Roll are the same static `Adivery` calls from Compose as
-from a View, so only the interstitial is repeated here; the rest are left to the screens above.
+Interstitial, rewarded, app open, offer wall and Pre-Roll are the same static `Adivery` calls from
+Compose as from a View, so only the interstitial is repeated here; the rest are left to the screens
+above.
 
 ## Supporting code
 
@@ -43,12 +48,14 @@ from a View, so only the interstitial is repeated here; the rest are left to the
 | [`activity_vast_ad.xml`](app/src/main/res/layout/activity_vast_ad.xml) | The ExoPlayer `PlayerView` the pre-roll plays in, and the 320×50 slot IMA draws the companion banner into |
 | [`proguard-rules.pro`](app/proguard-rules.pro) | A local copy of the `keep`/`dontwarn` rules the SDK already contributes through its own consumer rules, kept because the documentation links to this file |
 | [`ProfileStore.kt`](app/src/main/java/com/adivery/sample/ProfileStore.kt), [`CreateProfileActivity.kt`](app/src/main/java/com/adivery/sample/CreateProfileActivity.kt) | Sample plumbing only — storage for the credentials the sample runs with |
+| [`Wallet.kt`](app/src/main/java/com/adivery/sample/Wallet.kt) | Sample plumbing only — the balance the offer wall's rewards are added to |
 
 ## Running with your own credentials
 
 The home screen's **New profile** button takes an application id and one placement id per type from
-the [Adivery publisher panel](https://panel.adivery.com). Select the new profile and press
-**Apply**; because `Adivery.configure` runs once per process, the sample restarts to pick it up.
+the [Adivery publisher panel](https://panel.adivery.com); the offer wall placement id is optional.
+Select the new profile and press **Apply**; because `Adivery.configure` runs once per process, the
+sample restarts to pick it up.
 
 ## Requirements
 
@@ -57,7 +64,7 @@ the [Adivery publisher panel](https://panel.adivery.com). Select the new profile
 
 ```kotlin
 dependencies {
-    implementation("com.adivery:sdk:4.9.0")
+    implementation("com.adivery:sdk:4.10.0-alpha.1")
 }
 ```
 

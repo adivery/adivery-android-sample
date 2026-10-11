@@ -42,6 +42,14 @@ class GlobalAdListener : AdiveryListener() {
     override fun onAppOpenAdClicked(placementId: String) = report(placementId, "app open clicked")
     override fun onAppOpenAdClosed(placementId: String) = report(placementId, "app open closed")
 
+    override fun onOfferWallAdLoaded(placementId: String) = report(placementId, "offer wall loaded")
+    override fun onOfferWallAdShown(placementId: String) = report(placementId, "offer wall shown")
+    override fun onOfferWallAdClosed(placementId: String) = report(placementId, "offer wall closed")
+
+    override fun onOfferWallMissionRewarded(placementId: String, currency: String, rewardAmount: Int) {
+        report(placementId, "offer wall mission rewarded, $rewardAmount $currency")
+    }
+
     /** Loading failures and other SDK diagnostics arrive here rather than on a dedicated callback. */
     override fun log(placementId: String, message: String) = report(placementId, "log: $message")
 

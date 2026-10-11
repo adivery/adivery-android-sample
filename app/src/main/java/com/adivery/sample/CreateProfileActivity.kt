@@ -42,9 +42,11 @@ class CreateProfileActivity : AppCompatActivity() {
         val banner = binding.bannerLayout.requireUuid()
         val nativeAd = binding.nativeLayout.requireUuid()
         val vast = binding.vastLayout.requireUuid()
+        val offerWall = binding.offerWallLayout.optionalUuid()
 
         if (name == null || appId == null || interstitial == null || rewarded == null ||
-            appOpen == null || banner == null || nativeAd == null || vast == null
+            appOpen == null || banner == null || nativeAd == null || vast == null ||
+            offerWall == null
         ) {
             return null
         }
@@ -58,6 +60,7 @@ class CreateProfileActivity : AppCompatActivity() {
             bannerPlacementId = banner,
             nativePlacementId = nativeAd,
             vastPlacementId = vast,
+            offerWallPlacementId = offerWall,
         )
     }
 
@@ -77,6 +80,13 @@ class CreateProfileActivity : AppCompatActivity() {
 
     private fun TextInputLayout.requireUuid(): String? =
         requireText(R.string.error_invalid_uuid) { it.isValidUuid() }
+
+    /**
+     * Returns an empty string for an empty field. Offer wall is enabled per application, so most
+     * profiles have no placement for it.
+     */
+    private fun TextInputLayout.optionalUuid(): String? =
+        requireText(R.string.error_invalid_uuid) { it.isEmpty() || it.isValidUuid() }
 
     private inline fun TextInputLayout.requireText(
         errorRes: Int,
