@@ -182,6 +182,13 @@
             android:text="@string/sample_app_open" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/offer_wall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sample_offer_wall" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

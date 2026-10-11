@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding.interstitial.setOnClickListener { open(AdSample.INTERSTITIAL) }
         binding.rewarded.setOnClickListener { open(AdSample.REWARDED) }
         binding.appOpen.setOnClickListener { open(AdSample.APP_OPEN) }
+        binding.offerWall.setOnClickListener { open(AdSample.OFFER_WALL) }
         binding.banner.setOnClickListener { open(AdSample.BANNER) }
         binding.nativeAd.setOnClickListener { open(AdSample.NATIVE) }
         binding.vast.setOnClickListener { open(AdSample.VAST) }

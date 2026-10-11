@@ -39,6 +39,9 @@
             android:name=".kotlin.KotlinAppOpenActivity"
             android:exported="false" />
         <activity
+            android:name=".kotlin.KotlinOfferWallActivity"
+            android:exported="false" />
+        <activity
             android:name=".kotlin.KotlinBannerActivity"
             android:exported="false" />
         <activity
@@ -57,6 +60,9 @@
             android:exported="false" />
         <activity
             android:name=".java.JavaAppOpenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".java.JavaOfferWallActivity"
             android:exported="false" />
         <activity
             android:name=".java.JavaBannerActivity"

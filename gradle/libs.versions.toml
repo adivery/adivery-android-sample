@@ -3,7 +3,7 @@ agp = "9.4.0"
 # AGP 9 brings its own Kotlin, but the Compose compiler plugin is a separate artifact that has to be
 # pinned to that same Kotlin version. `./gradlew :app:dependencies` reports it as kotlin-stdlib.
 kotlin = "2.2.10"
-adivery = "4.9.0"
+adivery = "4.10.0-alpha.1"
 
 # The Adivery SDK supports minSdk 21, so this sample does too. Everything below is the newest release
 # that still ships minSdkVersion 21

@@ -36,6 +36,7 @@ class ProfileStore private constructor(context: Context) {
             putString(profile.key(KEY_BANNER), profile.bannerPlacementId)
             putString(profile.key(KEY_NATIVE), profile.nativePlacementId)
             putString(profile.key(KEY_VAST), profile.vastPlacementId)
+            putString(profile.key(KEY_OFFER_WALL), profile.offerWallPlacementId)
         }
     }
 
@@ -52,6 +53,7 @@ class ProfileStore private constructor(context: Context) {
             bannerPlacementId = prefs.read(name, KEY_BANNER),
             nativePlacementId = prefs.read(name, KEY_NATIVE),
             vastPlacementId = prefs.read(name, KEY_VAST),
+            offerWallPlacementId = prefs.read(name, KEY_OFFER_WALL),
         )
     }
 
@@ -71,6 +73,7 @@ class ProfileStore private constructor(context: Context) {
         private const val KEY_BANNER = "banner"
         private const val KEY_NATIVE = "native"
         private const val KEY_VAST = "vast"
+        private const val KEY_OFFER_WALL = "offer_wall"
 
         @Volatile
         private var instance: ProfileStore? = null
@@ -79,9 +82,9 @@ class ProfileStore private constructor(context: Context) {
         fun get(context: Context): ProfileStore =
             instance ?: synchronized(this) {
                 instance ?: ProfileStore(context).also {
-                    if (!it.hasProfile(AdProfile.BUNDLED.name)) {
-                        it.save(AdProfile.BUNDLED)
-                    }
+                    // Saved on every launch, not only the first, so that installs which stored an
+                    // older copy of the bundled credentials pick up the current ones.
+                    it.save(AdProfile.BUNDLED)
                     instance = it
                 }
             }

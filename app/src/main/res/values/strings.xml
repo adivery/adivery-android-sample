@@ -19,6 +19,7 @@
     <string name="sample_interstitial">Interstitial</string>
     <string name="sample_rewarded">Rewarded</string>
     <string name="sample_app_open">App open</string>
+    <string name="sample_offer_wall">Offer wall</string>
     <string name="sample_banner">Banner</string>
     <string name="sample_native">Native</string>
     <string name="sample_vast">Pre-Roll (VAST)</string>
@@ -26,6 +27,7 @@
     <string name="sample_interstitial_kotlin">Interstitial · Kotlin</string>
     <string name="sample_rewarded_kotlin">Rewarded · Kotlin</string>
     <string name="sample_app_open_kotlin">App open · Kotlin</string>
+    <string name="sample_offer_wall_kotlin">Offer wall · Kotlin</string>
     <string name="sample_banner_kotlin">Banner · Kotlin</string>
     <string name="sample_native_kotlin">Native · Kotlin</string>
     <string name="sample_vast_kotlin">Pre-Roll (VAST) · Kotlin</string>
@@ -33,6 +35,7 @@
     <string name="sample_interstitial_java">Interstitial · Java</string>
     <string name="sample_rewarded_java">Rewarded · Java</string>
     <string name="sample_app_open_java">App open · Java</string>
+    <string name="sample_offer_wall_java">Offer wall · Java</string>
     <string name="sample_banner_java">Banner · Java</string>
     <string name="sample_native_java">Native · Java</string>
     <string name="sample_vast_java">Pre-Roll (VAST) · Java</string>
@@ -62,6 +65,12 @@
     <string name="waiting_for_vast_url">Waiting for the VAST url (attempt %1$d of %2$d)</string>
     <string name="vast_url_ready">VAST url ready: %1$s</string>
     <string name="vast_url_unavailable">Gave up waiting for the VAST url, playing the content without an ad</string>
+    <string name="open_offer_wall">Open offer wall</string>
+    <string name="offer_wall_balance">Balance: %1$d</string>
+    <string name="offer_wall_no_placement">This profile has no offer wall placement. Adivery support enables the offer wall per application; once it is enabled, create an offer wall placement in the panel and add its id to a new profile.</string>
+    <string name="offer_wall_timed_out">Stopped waiting: the offer wall took too long to load</string>
+    <string name="offer_wall_left_screen">Stopped waiting: the user left the screen</string>
+    <string name="offer_wall_not_waiting">Not shown: the user is no longer waiting for the offer wall</string>
 
     <!-- Profile creation -->
     <string name="create_profile">New profile</string>
@@ -74,6 +83,7 @@
     <string name="hint_banner">Banner placement id</string>
     <string name="hint_native">Native placement id</string>
     <string name="hint_vast">Pre-Roll (VAST) placement id</string>
+    <string name="hint_offer_wall">Offer wall placement id (optional)</string>
     <string name="create">Create</string>
     <string name="error_invalid_uuid">This field must be a valid uuid</string>
     <string name="error_empty">This field cannot be empty</string>
