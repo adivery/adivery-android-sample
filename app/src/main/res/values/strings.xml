@@ -68,7 +68,6 @@
     <string name="open_offer_wall">Open offer wall</string>
     <string name="offer_wall_balance">Balance: %1$d</string>
     <string name="offer_wall_no_placement">This profile has no offer wall placement. Adivery support enables the offer wall per application; once it is enabled, create an offer wall placement in the panel and add its id to a new profile.</string>
-    <string name="offer_wall_timed_out">Stopped waiting: the offer wall took too long to load</string>
     <string name="offer_wall_left_screen">Stopped waiting: the user left the screen</string>
     <string name="offer_wall_not_waiting">Not shown: the user is no longer waiting for the offer wall</string>
 

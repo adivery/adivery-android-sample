@@ -1,8 +1,6 @@
 package com.adivery.sample.kotlin
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
@@ -37,12 +35,6 @@ class KotlinOfferWallActivity : AppCompatActivity() {
 
     /** Set from the tap on the button until the wall is shown or the wait is given up. */
     private var waitingForOfferWall = false
-
-    private val handler = Handler(Looper.getMainLooper())
-    private val loadTimeout = Runnable {
-        eventLog.log(getString(R.string.offer_wall_timed_out))
-        stopWaiting()
-    }
 
     private val listener = object : AdiveryListener() {
 
@@ -136,7 +128,6 @@ class KotlinOfferWallActivity : AppCompatActivity() {
         if (waitingForOfferWall) return
         waitingForOfferWall = true
         setLoading(true)
-        handler.postDelayed(loadTimeout, LOAD_TIMEOUT_MS)
 
         eventLog.log("prepareOfferWallAd")
         Adivery.prepareOfferWallAd(this, placementId)
@@ -144,7 +135,6 @@ class KotlinOfferWallActivity : AppCompatActivity() {
 
     private fun stopWaiting() {
         waitingForOfferWall = false
-        handler.removeCallbacks(loadTimeout)
         setLoading(false)
     }
 
@@ -155,10 +145,5 @@ class KotlinOfferWallActivity : AppCompatActivity() {
 
     private fun showBalance() {
         binding.balance.text = getString(R.string.offer_wall_balance, wallet.balance)
-    }
-
-    private companion object {
-        /** How long the user is kept waiting before the load is given up on. */
-        const val LOAD_TIMEOUT_MS = 10_000L
     }
 }

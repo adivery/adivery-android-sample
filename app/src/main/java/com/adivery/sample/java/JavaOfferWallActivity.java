@@ -1,8 +1,6 @@
 package com.adivery.sample.java;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -33,9 +31,6 @@ import com.adivery.sdk.AdiveryListener;
  */
 public class JavaOfferWallActivity extends AppCompatActivity {
 
-    /** How long the user is kept waiting before the load is given up on. */
-    private static final long LOAD_TIMEOUT_MS = 10_000L;
-
     private ActivityOfferWallBinding binding;
     private AdEventLog eventLog;
     private Wallet wallet;
@@ -43,12 +38,6 @@ public class JavaOfferWallActivity extends AppCompatActivity {
 
     /** Set from the tap on the button until the wall is shown or the wait is given up. */
     private boolean waitingForOfferWall = false;
-
-    private final Handler handler = new Handler(Looper.getMainLooper());
-    private final Runnable loadTimeout = () -> {
-        eventLog.log(getString(R.string.offer_wall_timed_out));
-        stopWaiting();
-    };
 
     private final AdiveryListener listener = new AdiveryListener() {
 
@@ -152,7 +141,6 @@ public class JavaOfferWallActivity extends AppCompatActivity {
         }
         waitingForOfferWall = true;
         setLoading(true);
-        handler.postDelayed(loadTimeout, LOAD_TIMEOUT_MS);
 
         eventLog.log("prepareOfferWallAd");
         Adivery.prepareOfferWallAd(this, placementId);
@@ -160,7 +148,6 @@ public class JavaOfferWallActivity extends AppCompatActivity {
 
     private void stopWaiting() {
         waitingForOfferWall = false;
-        handler.removeCallbacks(loadTimeout);
         setLoading(false);
     }
 
