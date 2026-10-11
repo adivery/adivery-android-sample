@@ -15,8 +15,8 @@ android {
         // The Adivery SDK requires minSdk 21 or above.
         minSdk = 21
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "4.10.0-alpha.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
