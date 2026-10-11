@@ -48,7 +48,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/open_offer_wall" />
 
-    <!-- The loading indicator shown while the user waits for the offer wall to open. -->
+    <!-- The loading indicator shown while the offer wall loads. -->
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress"
         android:layout_width="match_parent"

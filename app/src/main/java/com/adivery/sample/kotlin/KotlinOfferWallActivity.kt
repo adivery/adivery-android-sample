@@ -17,14 +17,11 @@ import com.adivery.sdk.AdiveryListener
 /**
  * Offer wall in Kotlin.
  *
- * Unlike the other full screen formats, the offer wall is never loaded ahead of time. Its missions,
- * step states and deadlines are fetched when it loads, so a wall loaded early would show stale ones.
- * Call [Adivery.prepareOfferWallAd] only when the user asks for the wall, and show it as soon as
- * `onOfferWallAdLoaded` arrives. Adivery does not reload a closed wall either, so every tap on the
- * button loads it again.
- *
- * Loading can take a few seconds. [waitingForOfferWall] records whether the user is still waiting,
- * and the wall is only shown if they are, so it never opens when they no longer expect it.
+ * Unlike the other full screen formats, the offer wall never should be loaded ahead of time.
+ * Its missions, step states and deadlines are fetched when it loads, so a wall loaded early would
+ * show stale ones. Call [Adivery.prepareOfferWallAd] only when the user asks for the wall, and
+ * show it as soon as `onOfferWallAdLoaded` arrives. Adivery does not reload a closed wall either,
+ * so every tap on the  button loads it again.
  */
 class KotlinOfferWallActivity : AppCompatActivity() {
 
@@ -33,19 +30,12 @@ class KotlinOfferWallActivity : AppCompatActivity() {
     private lateinit var wallet: Wallet
     private lateinit var placementId: String
 
-    /** Set from the tap on the button until the wall is shown or the wait is given up. */
-    private var waitingForOfferWall = false
-
     private val listener = object : AdiveryListener() {
 
         override fun onOfferWallAdLoaded(placementId: String) {
             eventLog.log("onOfferWallAdLoaded")
-            if (waitingForOfferWall) {
-                stopWaiting()
-                Adivery.showAd(placementId)
-            } else {
-                eventLog.log(getString(R.string.offer_wall_not_waiting))
-            }
+            setLoading(false)
+            Adivery.showAd(placementId)
         }
 
         override fun onOfferWallAdShown(placementId: String) = eventLog.log("onOfferWallAdShown")
@@ -73,10 +63,10 @@ class KotlinOfferWallActivity : AppCompatActivity() {
             showBalance()
         }
 
-        /** Loading failures are reported here. Stop waiting so the user can try again. */
+        /** Loading failures are reported here. Hide the indicator so the user can try again. */
         override fun log(placementId: String, message: String) {
             eventLog.log(message)
-            stopWaiting()
+            setLoading(false)
         }
     }
 
@@ -108,16 +98,6 @@ class KotlinOfferWallActivity : AppCompatActivity() {
         binding.open.setOnClickListener { openOfferWall() }
     }
 
-    override fun onStop() {
-        // The user has left the screen, so they no longer expect the wall to open. Showing the wall
-        // stops this screen too, but the wait has already ended by then.
-        if (waitingForOfferWall) {
-            eventLog.log(getString(R.string.offer_wall_left_screen))
-            stopWaiting()
-        }
-        super.onStop()
-    }
-
     override fun onDestroy() {
         // Anonymous listeners hold a reference to this activity, so always detach them.
         Adivery.removePlacementListener(placementId)
@@ -125,17 +105,11 @@ class KotlinOfferWallActivity : AppCompatActivity() {
     }
 
     private fun openOfferWall() {
-        if (waitingForOfferWall) return
-        waitingForOfferWall = true
+        // The disabled button also keeps a second tap from loading the wall again.
         setLoading(true)
 
         eventLog.log("prepareOfferWallAd")
         Adivery.prepareOfferWallAd(this, placementId)
-    }
-
-    private fun stopWaiting() {
-        waitingForOfferWall = false
-        setLoading(false)
     }
 
     private fun setLoading(loading: Boolean) {

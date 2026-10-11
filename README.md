@@ -22,7 +22,7 @@ Each screen requests an ad, shows it, and prints every SDK callback it receives 
 is visible while the sample runs.
 
 The offer wall works differently from the other full screen formats. It is loaded only when the user
-taps its button and shown as soon as it loads, and only while the user is still waiting for it.
+taps its button and shown as soon as it loads.
 
 ## Jetpack Compose
 

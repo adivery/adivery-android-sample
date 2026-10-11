@@ -20,14 +20,11 @@ import com.adivery.sdk.AdiveryListener;
 /**
  * Offer wall in Java.
  *
- * <p>Unlike the other full screen formats, the offer wall is never loaded ahead of time. Its
+ * <p>Unlike the other full screen formats, the offer wall never should be loaded ahead of time. Its
  * missions, step states and deadlines are fetched when it loads, so a wall loaded early would show
  * stale ones. Call {@link Adivery#prepareOfferWallAd} only when the user asks for the wall, and
  * show it as soon as {@code onOfferWallAdLoaded} arrives. Adivery does not reload a closed wall
  * either, so every tap on the button loads it again.
- *
- * <p>Loading can take a few seconds. {@link #waitingForOfferWall} records whether the user is still
- * waiting, and the wall is only shown if they are, so it never opens when they no longer expect it.
  */
 public class JavaOfferWallActivity extends AppCompatActivity {
 
@@ -36,20 +33,13 @@ public class JavaOfferWallActivity extends AppCompatActivity {
     private Wallet wallet;
     private String placementId;
 
-    /** Set from the tap on the button until the wall is shown or the wait is given up. */
-    private boolean waitingForOfferWall = false;
-
     private final AdiveryListener listener = new AdiveryListener() {
 
         @Override
         public void onOfferWallAdLoaded(@NonNull String placementId) {
             eventLog.log("onOfferWallAdLoaded");
-            if (waitingForOfferWall) {
-                stopWaiting();
-                Adivery.showAd(placementId);
-            } else {
-                eventLog.log(getString(R.string.offer_wall_not_waiting));
-            }
+            setLoading(false);
+            Adivery.showAd(placementId);
         }
 
         @Override
@@ -80,11 +70,11 @@ public class JavaOfferWallActivity extends AppCompatActivity {
             showBalance();
         }
 
-        /** Loading failures are reported here. Stop waiting so the user can try again. */
+        /** Loading failures are reported here. Hide the indicator so the user can try again. */
         @Override
         public void log(@NonNull String placementId, String message) {
             eventLog.log(message);
-            stopWaiting();
+            setLoading(false);
         }
     };
 
@@ -118,17 +108,6 @@ public class JavaOfferWallActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        // The user has left the screen, so they no longer expect the wall to open. Showing the wall
-        // stops this screen too, but the wait has already ended by then.
-        if (waitingForOfferWall) {
-            eventLog.log(getString(R.string.offer_wall_left_screen));
-            stopWaiting();
-        }
-        super.onStop();
-    }
-
-    @Override
     protected void onDestroy() {
         // Anonymous listeners hold a reference to this activity, so always detach them.
         Adivery.removePlacementListener(placementId);
@@ -136,19 +115,11 @@ public class JavaOfferWallActivity extends AppCompatActivity {
     }
 
     private void openOfferWall() {
-        if (waitingForOfferWall) {
-            return;
-        }
-        waitingForOfferWall = true;
+        // The disabled button also keeps a second tap from loading the wall again.
         setLoading(true);
 
         eventLog.log("prepareOfferWallAd");
         Adivery.prepareOfferWallAd(this, placementId);
-    }
-
-    private void stopWaiting() {
-        waitingForOfferWall = false;
-        setLoading(false);
     }
 
     private void setLoading(boolean loading) {
