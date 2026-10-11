@@ -79,9 +79,9 @@ class ProfileStore private constructor(context: Context) {
         fun get(context: Context): ProfileStore =
             instance ?: synchronized(this) {
                 instance ?: ProfileStore(context).also {
-                    if (!it.hasProfile(AdProfile.BUNDLED.name)) {
-                        it.save(AdProfile.BUNDLED)
-                    }
+                    // Saved on every launch, not only the first, so that installs which stored an
+                    // older copy of the bundled credentials pick up the current ones.
+                    it.save(AdProfile.BUNDLED)
                     instance = it
                 }
             }
