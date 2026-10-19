@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textAppearance="?attr/textAppearanceBodySmall"
-        tools:text="Placement: 25928bf1-d4f7-432c-aaf7-1780602796c3" />
+        tools:text="Placement: 9bc87b9f-3aef-4988-b1d2-2f4e5b67b2c5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/load"

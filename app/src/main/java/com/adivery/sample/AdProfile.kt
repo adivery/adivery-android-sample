@@ -23,12 +23,12 @@ data class AdProfile(
         /** Public demo credentials owned by Adivery. Always available in the profile list. */
         val BUNDLED = AdProfile(
             name = "adivery",
-            appId = "d5247816-a170-4b90-b4e2-c0f1fcd804a4",
-            interstitialPlacementId = "7436cec1-2b41-4140-bfef-cfd5b0fc7bda",
-            rewardedPlacementId = "271c8bd4-9000-476e-b096-6ef9bee296dc",
-            appOpenPlacementId = "6f5ebb45-f5a5-4220-9303-b5d44b6b86d2",
-            bannerPlacementId = "d47ebd8b-269e-4e59-ba12-3b83326ef351",
-            nativePlacementId = "b607ef9a-3218-4a7c-9c34-a91f9888c7e7",
+            appId = "738c5e66-2e4f-4ff0-8118-ef6c8235a5e9",
+            interstitialPlacementId = "5788d25b-b7d6-442c-a562-b4bef582c18c",
+            rewardedPlacementId = "29f509a9-3826-4ada-8404-4735aa14b510",
+            appOpenPlacementId = "c0b3bf0e-75a5-4183-ad86-2cc5c07c07d6",
+            bannerPlacementId = "06f0c520-3cc8-45c0-bbf1-f866f7eac525",
+            nativePlacementId = "9bc87b9f-3aef-4988-b1d2-2f4e5b67b2c5",
             vastPlacementId = "a750d453-bc0f-4006-8346-d398fcf34a50",
             offerWallPlacementId = "9cad440a-8271-49d2-8f81-0819268a5ce4",
         )

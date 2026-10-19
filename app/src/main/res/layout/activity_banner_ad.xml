@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textAppearance="?attr/textAppearanceBodySmall"
-        tools:text="Placement: 5f2c4c86-a6ec-4735-9a44-f881fe40789f" />
+        tools:text="Placement: 06f0c520-3cc8-45c0-bbf1-f866f7eac525" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textAppearance="?attr/textAppearanceBodySmall"
-        tools:text="Placement: 8ec21007-19e6-4e71-a156-9d3f326a839a" />
+        tools:text="Placement: 9cad440a-8271-49d2-8f81-0819268a5ce4" />
 
     <TextView
         android:id="@+id/balance"
